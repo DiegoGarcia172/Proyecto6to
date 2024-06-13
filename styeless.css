@@ -1,0 +1,17 @@
+.hero {
+    height: 100vh;
+    background: #19c5fe; /* Color de fondo azul */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-align: center;
+  }
+.hero h1 {
+    font-size: 3em;
+    margin: 0;
+}
+.hero p {
+    font-size: 1.5em;
+    margin: 10px 0;
+}
