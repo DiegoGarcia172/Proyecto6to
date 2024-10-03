@@ -1,4 +1,5 @@
 <?php
+session_start();
 // Aquí podrías incluir tus archivos de conexión y validación de cliente si es necesario
 include 'conexion.php';
 include 'validacioncliente.php';

@@ -1,10 +1,7 @@
 <?php
+session_start();
 include 'conexion.php'; 
 include 'validacioncliente.php';
-if (!isset($_SESSION['usuarioid']) || $_SESSION['rol_id'] != 3) {
-    header('Location: login.php');
-    exit();
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">

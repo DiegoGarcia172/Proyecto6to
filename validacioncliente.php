@@ -1,6 +1,5 @@
 <?php
 include 'conexion.php';
-session_start();
 $sql = "SELECT nombre FROM Usuarios WHERE usuarioid = ?";
 if (!isset($_SESSION['usuarioid']) || $_SESSION['rol_id'] != 3) {
   header('Location: login.php');

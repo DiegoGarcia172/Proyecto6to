@@ -5,7 +5,6 @@ if(isset($_GET['order_id']) && isset($_GET['company_id'])) {
 
     // Incluir archivo de conexión
     include 'conexion.php';
-    include 'validacionadm.php';
 
     // Crear la conexión
     $conn = sqlsrv_connect($serverName, $connectionInfo);
