@@ -46,7 +46,6 @@ if (!isset($_SESSION['carrito'])) {
         </li>
       </ul>
       <ul class="navbar-nav ms-auto">   
-    
         <li class="nav-item px-2">
           <a class="btn btn-outline-secondary" href="cart.php" aria-label="Carrito">
             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-cart-fill" viewBox="0 0 16 16">
@@ -66,7 +65,6 @@ if (!isset($_SESSION['carrito'])) {
     </div>
   </div>
 </nav>
-
     <div class="container mt-5">
         <h2>Carrito de Compras</h2>
         <table class="table table-bordered">

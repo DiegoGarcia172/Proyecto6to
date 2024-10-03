@@ -64,35 +64,21 @@ include 'validacioncliente.php';
   </div>
 </nav>
 <?php
-// Incluir archivo de conexión
 include 'conexion.php';
-
-// Crear la conexión
 $conn = sqlsrv_connect($serverName, $connectionInfo);
-
-// Verificar si la conexión fue exitosa
 if ($conn === false) {
     die(print_r(sqlsrv_errors(), true));
 }
-
-// Obtener el usuarioid de la sesión (esto puede variar dependiendo de cómo manejes la autenticación)
 if (!isset($_SESSION['usuarioid'])) {
-    // Redireccionar o manejar la falta de usuario autenticado
     exit('Error: Usuario no autenticado');
 }
 $usuarioid = $_SESSION['usuarioid'];
-
-// Preparar la consulta con la cláusula WHERE para filtrar por usuarioid
-$sql = "{CALL sp_GetOrderDetailsByUser(?)}";  // Cambiar el nombre del procedimiento almacenado según corresponda
+$sql = "{CALL sp_GetOrderDetailsByUser(?)}";
 $params = array($usuarioid);
 $stmt = sqlsrv_query($conn, $sql, $params);
-
-// Verificar si la consulta fue exitosa
 if ($stmt === false) {
     die(print_r(sqlsrv_errors(), true));
 }
-
-// HTML y CSS para tarjetas bonitas
 echo '<style>
         .card-container {
             display: flex;
@@ -152,10 +138,7 @@ while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
     echo '<a href="generar_pdf.php?order_id=' . $row['order_id'] . '&company_id='  . $row['company_id'] . '" class="btn btn-outline-info">Descargar PDF</a>';
     echo '</div>';
 }
-
 echo '</div>';
-
-// Liberar los recursos
 sqlsrv_free_stmt($stmt);
 sqlsrv_close($conn);
 ?>

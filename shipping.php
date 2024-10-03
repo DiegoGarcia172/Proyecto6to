@@ -2,7 +2,6 @@
 session_start();
 include 'conexion.php';
 include 'validacioncliente.php';
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $metodo_pago = $_POST['metodo_pago'];
     $_SESSION['metodo_pago'] = $metodo_pago;
