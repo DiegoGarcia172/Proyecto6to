@@ -104,27 +104,18 @@ include 'conexion.php';
     <script src="bootstrap-5.3.3-dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>
-
 <?php
 include 'conexion.php';
-// Definir el ID de la compañía y el usuario desde el formulario
 $company_id = $_POST['compania'];
 $usuarioid = $_POST['usuario'];
-
-// Variables para los datos del usuario y compañía
 $user = $usuarioid;
 $companid = $company_id;
-
-// Ejecutar el procedimiento almacenado
 $sql = "EXEC ObtenerVentasPorFiltros @company_id = $company_id, @usuarioid = $usuarioid";
 $result = sqlsrv_query($conn, $sql);
-
 if ($result === false) {
     die("Error al ejecutar la consulta: " . print_r(sqlsrv_errors(), true));
 }
-
 if (sqlsrv_has_rows($result)) {
-    // Imprimir la tabla HTML
     echo "<table class='table table-bordered'>
     <thead>
         <tr>
@@ -146,8 +137,6 @@ if (sqlsrv_has_rows($result)) {
         </tr>
     </thead>
     <tbody>";
-
-    // Mostrar los datos de cada fila
     while ($row = sqlsrv_fetch_array($result, SQLSRV_FETCH_ASSOC)) {
         echo "<tr>";
         echo "<td>" . $row["Usuario"] . "</td>";
@@ -167,11 +156,8 @@ if (sqlsrv_has_rows($result)) {
         echo "<td>" . $row["Total"] . "</td>";
         echo "</tr>";
     }
-
     echo "</tbody>
     </table>";
-
-    // Enlace para exportar a PDF
     echo '<a class="btn btn-outline-secondary mx-5" href="pdfrepor.php?usuario=' . $user . '&compania=' . $company_id . '">
         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clipboard-data" viewBox="0 0 16 16">
             <path d="M4 11a1 1 0 1 1 2 0v1a1 1 0 1 1-2 0zm6-4a1 1 0 1 1 2 0v5a1 1 0 1 1-2 0zM7 9a1 1 0 0 1 2 0v3a1 1 0 1 1-2 0z"/>
@@ -180,12 +166,9 @@ if (sqlsrv_has_rows($result)) {
         </svg>
         Exportar
     </a>';
-
 } else {
     echo "0 resultados";
 }
-
-// Liberar recursos
 sqlsrv_free_stmt($result);
 sqlsrv_close($conn);
 ?>

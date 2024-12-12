@@ -103,27 +103,16 @@ include 'autadm.php';
   </div>
 </nav>
 <?php
-// Incluir archivo de conexión
 include 'conexion.php';
-
-// Crear la conexión
 $conn = sqlsrv_connect($serverName, $connectionInfo);
-
-// Verificar si la conexión fue exitosa
 if ($conn === false) {
     die(print_r(sqlsrv_errors(), true));
 }
-
-// Preparar y ejecutar la consulta
 $sql = "{CALL sp_GetAllOrderDetailsWithRelations}";
 $stmt = sqlsrv_query($conn, $sql);
-
-// Verificar si la consulta fue exitosa
 if ($stmt === false) {
     die(print_r(sqlsrv_errors(), true));
 }
-
-// HTML y CSS para tarjetas bonitas
 echo '<style>
         .card-container {
             display: flex;
@@ -149,9 +138,7 @@ echo '<style>
             margin: 5px 0;
         }
     </style>';
-
 echo '<div class="card-container">';
-
 while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
     echo '<div class="card">';
     echo '<h3>Order: ' . $row['order_id'] . '</h3>';
@@ -173,10 +160,7 @@ while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
     echo '<a href="generar_pdf.php?order_id=' . $row['order_id'] . '&company_id='  . $row['company_id'] . '" class="btn btn-outline-info">Descargar PDF</a>';
     echo '</div>';
 }
-
 echo '</div>';
-
-// Liberar los recursos
 sqlsrv_free_stmt($stmt);
 sqlsrv_close($conn);
 ?>

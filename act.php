@@ -1,37 +1,26 @@
 <?php
-// Incluir el archivo de conexión
 include 'conexion.php';
-
-// Obtener los roles desde la base de datos
 $sql = "SELECT rol_id, rol_nombre FROM Roles";
 $stmt = sqlsrv_query($conn, $sql);
-
 if ($stmt === false) {
     die(print_r(sqlsrv_errors(), true));
 }
-
 $roles = [];
 while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
     $roles[] = $row;
 }
-
-// Obtener los nombres de los usuarios desde la base de datos
 $sql = "SELECT usuarioid, nombre FROM Usuarios";
 $stmt = sqlsrv_query($conn, $sql);
-
 if ($stmt === false) {
     die(print_r(sqlsrv_errors(), true));
 }
-
 $usuarios = [];
 while ($row = sqlsrv_fetch_array($stmt, SQLSRV_FETCH_ASSOC)) {
     $usuarios[] = $row;
 }
-
 sqlsrv_free_stmt($stmt);
 sqlsrv_close($conn);
 ?>
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
